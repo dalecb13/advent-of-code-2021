@@ -7,6 +7,7 @@ import (
 	"os"
 
 	"github.com/dalecb13/advent-of-code-2021/day1"
+	"github.com/dalecb13/advent-of-code-2021/day2"
 )
 
 func main() {
@@ -21,9 +22,6 @@ func main() {
 	flag.IntVar(&part, "p", 1, "Part (1 or 2)")
 	flag.Parse()
 
-	log.Printf("day %+v", day)
-	log.Printf("part %+v", part)
-
 	if day < 1 || day > 32 {
 		log.Fatalf("Day must be between 1 and 31, inclusive")
 	}
@@ -37,6 +35,12 @@ func main() {
 			day1.Day1Part1()
 		} else {
 			day1.Day1Part2()
+		}
+	case 2:
+		if part == 1 {
+			day2.Day2Part1()
+		} else {
+			log.Fatal("Day 2 Part 2 solution not yet ready")
 		}
 	default:
 		fmt.Println("No solution available for that day.")
