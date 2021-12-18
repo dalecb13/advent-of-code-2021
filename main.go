@@ -1,28 +1,44 @@
 package main
 
 import (
+	"flag"
+	"fmt"
 	"log"
 	"os"
-	"strconv"
 
 	"github.com/dalecb13/advent-of-code-2021/day1"
 )
 
 func main() {
 	numArgs := len(os.Args)
-	if numArgs != 2 {
+	if numArgs != 3 {
 		log.Fatalf("Argument must be defined")
 	}
 
-	day := os.Args[1]
+	var day, part int
 
-	dayInt, err := strconv.Atoi(day)
-	if err != nil {
-		log.Fatalf("Argument must be an integer")
+	flag.IntVar(&day, "d", 1, "Day of the Advent Calendar")
+	flag.IntVar(&part, "p", 1, "Part (1 or 2)")
+	flag.Parse()
+
+	log.Printf("day %+v", day)
+	log.Printf("part %+v", part)
+
+	if day < 1 || day > 32 {
+		log.Fatalf("Day must be between 1 and 31, inclusive")
+	}
+	if part != 1 && part != 2 {
+		log.Fatalf("Part must be 1 or 2")
 	}
 
-	switch dayInt {
+	switch day {
 	case 1:
-		day1.Day1Part1()
+		if part == 1 {
+			day1.Day1Part1()
+		} else {
+			day1.Day1Part2()
+		}
+	default:
+		fmt.Println("No solution available for that day.")
 	}
 }
