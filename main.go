@@ -8,6 +8,7 @@ import (
 
 	"github.com/dalecb13/advent-of-code-2021/day1"
 	"github.com/dalecb13/advent-of-code-2021/day2"
+	"github.com/dalecb13/advent-of-code-2021/day3"
 )
 
 func main() {
@@ -32,15 +33,21 @@ func main() {
 	switch day {
 	case 1:
 		if part == 1 {
-			day1.Day1Part1()
+			day1.Part1()
 		} else {
-			day1.Day1Part2()
+			day1.Part2()
 		}
 	case 2:
 		if part == 1 {
-			day2.Day2Part1("day2/input.txt")
+			day2.Part1("day2/input.txt")
 		} else {
-			day2.Day2Part2("day2/input.txt")
+			day2.Part2("day2/input.txt")
+		}
+	case 3:
+		if part == 1 {
+			day3.Part1("day3/input.txt")
+		} else {
+			log.Fatalf("Day 3 Part 2 solution not yet ready.")
 		}
 	default:
 		fmt.Println("No solution available for that day.")

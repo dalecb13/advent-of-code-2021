@@ -9,7 +9,7 @@ import (
 	"strings"
 )
 
-func Day2Part1(filePath string) int {
+func Part1(filePath string) int {
 	fmt.Println("Running Solution for Day 2 Part 1!")
 
 	file, err := os.Open(filePath)
@@ -67,7 +67,7 @@ func Day2Part1(filePath string) int {
 	return result
 }
 
-func Day2Part2(filePath string) int {
+func Part2(filePath string) int {
 	fmt.Println("Running Solution for Day 2 Part 2!")
 
 	file, err := os.Open(filePath)

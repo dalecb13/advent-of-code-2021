@@ -8,7 +8,7 @@ import (
 	"strconv"
 )
 
-func Day1Part1() {
+func Part1() {
 	fmt.Println("Running Solution for Day 1 Part 1!")
 
 	file, err := os.Open("day1/input.txt")
@@ -48,7 +48,7 @@ func Day1Part1() {
 	log.Printf("Number of increases %+v", numIncreased)
 }
 
-func Day1Part2() {
+func Part2() {
 	fmt.Println("Running Solution for Day 1 Part 2!")
 
 	file, err := os.Open("day1/input.txt")
