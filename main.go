@@ -38,9 +38,9 @@ func main() {
 		}
 	case 2:
 		if part == 1 {
-			day2.Day2Part1()
+			day2.Day2Part1("day2/input.txt")
 		} else {
-			log.Fatal("Day 2 Part 2 solution not yet ready")
+			day2.Day2Part2("day2/input.txt")
 		}
 	default:
 		fmt.Println("No solution available for that day.")
