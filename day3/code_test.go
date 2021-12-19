@@ -102,3 +102,11 @@ func TestTransposedStringSlices(t *testing.T) {
 		}
 	}
 }
+
+func TestPart1(t *testing.T) {
+	result := Part1("./test_input.txt")
+	if result != 198 {
+		t.Fatalf("Expected result to be 198")
+		t.Fail()
+	}
+}

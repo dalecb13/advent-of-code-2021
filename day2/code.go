@@ -132,6 +132,5 @@ func Part2(filePath string) int {
 		}
 	}
 
-	log.Printf("Product of distance %+v and depth %+v is %+v", horizontal, depth, horizontal*depth)
 	return horizontal * depth
 }

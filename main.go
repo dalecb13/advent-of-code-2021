@@ -41,11 +41,13 @@ func main() {
 		if part == 1 {
 			day2.Part1("day2/input.txt")
 		} else {
-			day2.Part2("day2/input.txt")
+			product := day2.Part2("day2/input.txt")
+			log.Printf("Product is %+v", product)
 		}
 	case 3:
 		if part == 1 {
-			day3.Part1("day3/input.txt")
+			powerConsumption := day3.Part1("day3/input.txt")
+			log.Printf("powerConsumption is %+v", powerConsumption)
 		} else {
 			log.Fatalf("Day 3 Part 2 solution not yet ready.")
 		}

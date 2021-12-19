@@ -8,7 +8,7 @@ import (
 )
 
 func FileContents(filePath string) []string {
-	file, err := os.Open("day3/test_input.txt")
+	file, err := os.Open(filePath)
 	if err != nil {
 		log.Fatalf(err.Error())
 	}

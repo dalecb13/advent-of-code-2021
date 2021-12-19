@@ -2,18 +2,9 @@ package day3
 
 import (
 	"fmt"
-	"log"
-	"strconv"
 
 	"github.com/dalecb13/advent-of-code-2021/common"
 )
-
-func stringToBin(s string) (binString string) {
-	for _, c := range s {
-		binString = fmt.Sprintf("%s%b", binString, c)
-	}
-	return
-}
 
 // RuneFrequencies counts the number of each character in a string
 func RuneFrequencies(str string) map[rune]int {
@@ -110,33 +101,35 @@ func Part1(filePath string) int {
 		indexRuneFrequencies[freqIdx] = frequencies
 	}
 
-	gammaString := ""
-	epsilonString := ""
-	// zeroRune := []rune("0")[0]
-	// oneRune := []rune("1")[1]
-	for idx, frequencies := range indexRuneFrequencies {
-		// find the highest and second highest values
-		log.Printf("idx %+v", idx)
-		log.Printf("frequencies %+v", frequencies)
+	gammaRunes := []rune{}
+	epsilonRunes := []rune{}
+	zeroRune := []rune("0")[0]
+	oneRune := []rune("1")[0]
+	for i := 0; i < len(indexRuneFrequencies); i++ {
+		frequencies := indexRuneFrequencies[i]
+
+		// each `frequencies` is histogram of the number of 0's and 1's in the given column
+		numZeroes := frequencies[zeroRune]
+		numOnes := frequencies[oneRune]
+
+		if numZeroes > numOnes {
+			// zeroes are more common, so assign 0 to gamma
+			gammaRunes = append(gammaRunes, zeroRune)
+			epsilonRunes = append(epsilonRunes, oneRune)
+		} else {
+			// ones are more common, so assign 1 to gamma
+			gammaRunes = append(gammaRunes, oneRune)
+			epsilonRunes = append(epsilonRunes, zeroRune)
+		}
 	}
 
-	log.Printf("gammaString %v", gammaString)
-	log.Printf("epsilonString %v", epsilonString)
+	gammaString := string(gammaRunes)
+	epsilonString := string(epsilonRunes)
 
-	// convert string to binary to decimal
-	gammaBinary := stringToBin(gammaString)
-	epsilonBinary := stringToBin(epsilonString)
-	log.Printf("gammaBinary %v", gammaBinary)
-	log.Printf("epsilonBinary %v", epsilonBinary)
-
-	gammaRate, _ := strconv.ParseInt(gammaBinary, 2, 64)
-	epsilonRate, _ := strconv.ParseInt(epsilonBinary, 2, 64)
-	log.Printf("gammaRate %v", gammaRate)
-	log.Printf("epsilonRate %v", epsilonRate)
+	gammaRate := common.BinaryStringToDecimal(gammaString)
+	epsilonRate := common.BinaryStringToDecimal(epsilonString)
 
 	powerConsumption := int(gammaRate) * int(epsilonRate)
 
-	log.Printf("powerConsumption is %+v", powerConsumption)
-
-	return int(gammaRate) * int(epsilonRate)
+	return powerConsumption
 }
