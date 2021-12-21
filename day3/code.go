@@ -2,6 +2,7 @@ package day3
 
 import (
 	"fmt"
+	"log"
 
 	"github.com/dalecb13/advent-of-code-2021/common"
 )
@@ -132,4 +133,123 @@ func Part1(filePath string) int {
 	powerConsumption := int(gammaRate) * int(epsilonRate)
 
 	return powerConsumption
+}
+
+func FindOxygenGeneratingRate(diagnosticReport [][]rune, digit int) []rune {
+	// 1. check if input has only one element
+	if len(diagnosticReport) == 1 {
+		return diagnosticReport[0]
+	}
+
+	// 2. count 1's and 0's
+	numOnes := 0
+	numZeroes := 0
+	oneRune := []rune("1")[0]
+	zeroRune := []rune("0")[0]
+	for reportIdx := 0; reportIdx < len(diagnosticReport); reportIdx++ {
+		row := diagnosticReport[reportIdx]
+		if row[digit] == oneRune {
+			numOnes++
+		} else if row[digit] == zeroRune {
+			numZeroes++
+		} else {
+			log.Printf("Unknown rune %+v", row[digit])
+		}
+	}
+
+	updatedReport := [][]rune{}
+	// 3. keep rows based on majority
+	if numOnes >= numZeroes {
+		// keep ones
+		for reportIdx := 0; reportIdx < len(diagnosticReport); reportIdx++ {
+			reportRow := diagnosticReport[reportIdx]
+			if reportRow[digit] == oneRune {
+				updatedReport = append(updatedReport, diagnosticReport[reportIdx])
+			}
+		}
+	} else {
+		// keep zeroes
+		for reportIdx := 0; reportIdx < len(diagnosticReport); reportIdx++ {
+			reportRow := diagnosticReport[reportIdx]
+			if reportRow[digit] == zeroRune {
+				updatedReport = append(updatedReport, diagnosticReport[reportIdx])
+			}
+		}
+	}
+
+	// 4. increment digit
+	nextDigit := digit + 1
+
+	// 5. call function with updates
+	return FindOxygenGeneratingRate(updatedReport, nextDigit)
+}
+
+func FindCo2ScrubbingRate(diagnosticReport [][]rune, digit int) []rune {
+	// 1. check if input has only one element
+	if len(diagnosticReport) == 1 {
+		return diagnosticReport[0]
+	}
+
+	// 2. count 1's and 0's
+	numOnes := 0
+	numZeroes := 0
+	oneRune := []rune("1")[0]
+	zeroRune := []rune("0")[0]
+	for reportIdx := 0; reportIdx < len(diagnosticReport); reportIdx++ {
+		row := diagnosticReport[reportIdx]
+		if row[digit] == oneRune {
+			numOnes++
+		} else if row[digit] == zeroRune {
+			numZeroes++
+		} else {
+			log.Printf("Unknown rune %+v", row[digit])
+		}
+	}
+
+	updatedReport := [][]rune{}
+	// 3. keep rows based on majority
+	if numOnes >= numZeroes {
+		// keep ones
+		for reportIdx := 0; reportIdx < len(diagnosticReport); reportIdx++ {
+			reportRow := diagnosticReport[reportIdx]
+			if reportRow[digit] == zeroRune {
+				updatedReport = append(updatedReport, diagnosticReport[reportIdx])
+			}
+		}
+	} else {
+		// keep zeroes
+		for reportIdx := 0; reportIdx < len(diagnosticReport); reportIdx++ {
+			reportRow := diagnosticReport[reportIdx]
+			if reportRow[digit] == oneRune {
+				updatedReport = append(updatedReport, diagnosticReport[reportIdx])
+			}
+		}
+	}
+
+	// 4. increment digit
+	nextDigit := digit + 1
+
+	// 5. call function with updates
+	return FindCo2ScrubbingRate(updatedReport, nextDigit)
+}
+
+func Part2(filePath string) int {
+	fmt.Println("Running Solution for Day 3 Part 1!")
+
+	fileContents := common.FileContents(filePath)
+	diagnosticReport := [][]rune{}
+	for fileIndex := 0; fileIndex < len(fileContents); fileIndex++ {
+		reportLine := []rune(fileContents[fileIndex])
+		diagnosticReport = append(diagnosticReport, reportLine)
+	}
+
+	oxygenGeneratingRateRunes := FindOxygenGeneratingRate(diagnosticReport, 0)
+	co2ScrubbingRateRunes := FindCo2ScrubbingRate(diagnosticReport, 0)
+
+	oxygenGeneratingRateString := string(oxygenGeneratingRateRunes)
+	co2ScrubbingRateString := string(co2ScrubbingRateRunes)
+	oxygenGeneratingRate := common.BinaryStringToDecimal(oxygenGeneratingRateString)
+	co2ScrubbingRate := common.BinaryStringToDecimal(co2ScrubbingRateString)
+
+	return int(oxygenGeneratingRate) * int(co2ScrubbingRate)
 }

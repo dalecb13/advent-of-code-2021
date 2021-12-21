@@ -49,7 +49,8 @@ func main() {
 			powerConsumption := day3.Part1("day3/input.txt")
 			log.Printf("powerConsumption is %+v", powerConsumption)
 		} else {
-			log.Fatalf("Day 3 Part 2 solution not yet ready.")
+			lifeSupportRating := day3.Part2("day3/input.txt")
+			log.Printf("lifeSupportRating is %+v", lifeSupportRating)
 		}
 	default:
 		fmt.Println("No solution available for that day.")

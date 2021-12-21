@@ -2,6 +2,8 @@ package day3
 
 import (
 	"testing"
+
+	"github.com/dalecb13/advent-of-code-2021/common"
 )
 
 func TestRuneFrequencies(t *testing.T) {
@@ -107,6 +109,68 @@ func TestPart1(t *testing.T) {
 	result := Part1("./test_input.txt")
 	if result != 198 {
 		t.Fatalf("Expected result to be 198")
+		t.Fail()
+	}
+}
+
+func TestFindOxygenGeneratingRate(t *testing.T) {
+	input := [][]rune{
+		[]rune("00100"),
+		[]rune("11110"),
+		[]rune("10110"),
+		[]rune("10111"),
+		[]rune("10101"),
+		[]rune("01111"),
+		[]rune("00111"),
+		[]rune("11100"),
+		[]rune("10000"),
+		[]rune("11001"),
+		[]rune("00010"),
+		[]rune("01010"),
+	}
+	expectedResult := int64(23)
+
+	rate := FindOxygenGeneratingRate(input, 0)
+	str := string(rate)
+	actualResult := common.BinaryStringToDecimal(str)
+
+	if actualResult != expectedResult {
+		t.Fatalf("Expected result to be 23")
+		t.Fail()
+	}
+}
+
+func TestFindCo2ScrubbingRate(t *testing.T) {
+	input := [][]rune{
+		[]rune("00100"),
+		[]rune("11110"),
+		[]rune("10110"),
+		[]rune("10111"),
+		[]rune("10101"),
+		[]rune("01111"),
+		[]rune("00111"),
+		[]rune("11100"),
+		[]rune("10000"),
+		[]rune("11001"),
+		[]rune("00010"),
+		[]rune("01010"),
+	}
+	expectedResult := int64(10)
+
+	rate := FindCo2ScrubbingRate(input, 0)
+	str := string(rate)
+	actualResult := common.BinaryStringToDecimal(str)
+
+	if actualResult != expectedResult {
+		t.Fatalf("Expected result to be 23")
+		t.Fail()
+	}
+}
+
+func TestPart2(t *testing.T) {
+	result := Part2("./test_input.txt")
+	if result != 230 {
+		t.Fatalf("Expected result to be 230")
 		t.Fail()
 	}
 }
